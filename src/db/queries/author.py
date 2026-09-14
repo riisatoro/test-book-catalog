@@ -1,8 +1,9 @@
-from sqlalchemy import select
+from sqlalchemy import delete, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from db.models.author import Author
+from db.models.book import Book
 
 
 async def get_author_by_id(db: AsyncSession, author_id: int) -> Author | None:
@@ -50,5 +51,6 @@ async def update_author(db: AsyncSession, author: Author, **fields) -> Author:
 
 
 async def delete_author(db: AsyncSession, author: Author) -> None:
+    await db.execute(delete(Book).where(Book.author_id == author.id))
     await db.delete(author)
     await db.commit()
