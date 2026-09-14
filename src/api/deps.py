@@ -11,7 +11,7 @@ from db.session import get_db
 bearer_scheme = HTTPBearer()
 
 
-async def get_current_author(
+async def auth_user(
     credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme),
     db: AsyncSession = Depends(get_db),
 ) -> Author:

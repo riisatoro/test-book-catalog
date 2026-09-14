@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from core.security import create_access_token, verify_password
 from db.queries.author import get_author_by_username
 from db.session import get_db
-from schemas.author import AuthorLogin, AuthorRead, Token
+from schemas.author import AuthorLogin, Token
 
 router = APIRouter()
 
@@ -23,5 +23,4 @@ async def login(
 
     return Token(
         access_token=create_access_token(str(author.id)),
-        author=AuthorRead.model_validate(author),
     )

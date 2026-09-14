@@ -4,6 +4,7 @@ from pathlib import Path
 from fastapi import FastAPI
 
 from api.authorization import router as auth_router
+from api.profile.profile import router as profile_router
 from db.models import Author  # noqa: F401 — register metadata before create_all
 from db.session import Base, engine
 
@@ -18,15 +19,4 @@ async def lifespan(_app: FastAPI):
 
 app = FastAPI(title="Book Catalog", lifespan=lifespan)
 app.include_router(auth_router, prefix="/api/v1")
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(
-        "main:app",
-        host="127.0.0.1",
-        port=8000,
-        reload=True,
-        app_dir=str(Path(__file__).resolve().parent),
-    )
+app.include_router(profile_router, prefix="/api/v1")

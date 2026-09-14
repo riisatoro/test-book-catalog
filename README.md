@@ -23,3 +23,6 @@ OpenAPI docs: http://127.0.0.1:8000/docs
 
 - `POST /api/v1/register` — create an Author (`username`, `name`, `password`)
 - `POST /api/v1/login` — authenticate by `username` and `password`, receive a JWT
+- `GET /api/v1/profile` — read the current author's profile (Bearer token)
+- `PATCH /api/v1/profile` — update own profile (`name`, `bio`, `birth_year`; not username or password)
+- `DELETE /api/v1/profile` — delete own profile

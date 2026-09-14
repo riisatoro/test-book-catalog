@@ -39,3 +39,16 @@ async def create_author(
         raise
     await db.refresh(author)
     return author
+
+
+async def update_author(db: AsyncSession, author: Author, **fields) -> Author:
+    for key, value in fields.items():
+        setattr(author, key, value)
+    await db.commit()
+    await db.refresh(author)
+    return author
+
+
+async def delete_author(db: AsyncSession, author: Author) -> None:
+    await db.delete(author)
+    await db.commit()

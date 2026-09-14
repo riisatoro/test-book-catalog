@@ -12,6 +12,14 @@ class AuthorLogin(BaseModel):
     password: str
 
 
+class AuthorUpdate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    name: str | None = Field(default=None, min_length=1, max_length=255)
+    bio: str | None = None
+    birth_year: int | None = Field(default=None, ge=1, le=2100)
+
+
 class AuthorRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
@@ -25,4 +33,3 @@ class AuthorRead(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
-    author: AuthorRead
