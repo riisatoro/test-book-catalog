@@ -30,6 +30,7 @@ Add create_at & update_at datetime field for each record
 
 6. Optimization
 Add indexes for books list for quick requests
+Add workers for uvicorn to handle concurrent requests
 
 
 7. Further development
